@@ -1,0 +1,30 @@
+//////////////////////////////////
+// MAIN SASS FILE - IMPORT HERE //
+//////////////////////////////////
+
+@import './App.scss';
+@import './LoginSignUpScreen.scss';
+@import './Header.scss';
+@import './RegisterScreen.scss';
+@import './Dashboard.scss';
+
+@import url("https://fonts.googleapis.com/css?family=Megrim&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Black+Ops+One|Jim+Nightshade|Love+Ya+Like+A+Sister|Monoton|Quantico|Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ewert|Hanalei|Henny+Penny|Major+Mono+Display|Megrim|Milonga|Montserrat+Subrayada|Mystery+Quest|Spirax|Srisakdi|UnifrakturMaguntia|Vibes|Zilla+Slab+Highlight&display=swap');
+
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

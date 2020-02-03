@@ -1,0 +1,125 @@
+.register-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;  
+  height: 100%;
+  margin: 0 auto;
+  margin-top: 6vh;
+
+  .register-form-container {
+    //width: 50vw;
+    width: 500px;   
+    height: auto;
+    margin: 10vh auto;
+    border-radius: 5px;
+    //background: #2eb497;
+    padding: 2%;
+    border: 1px solid #d3d3d3;
+
+    @media (max-width: 800px) {
+      width: 90vw;
+      height: auto;
+    }
+
+    @media (max-width: 500px) {
+      width: 90vw;
+      height: auto;     
+    }
+    
+    .register-form-title {
+      color: gray;
+      font-size: 3.5rem;
+      margin: 0;
+      margin: 0px auto;     
+      font-family: 'Jim Nightshade', cursive; 
+    }
+
+    .register-form { 
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      //width: 60%;
+      width: 100%;
+      height: auto;
+      margin: 3% auto;
+
+      @media (max-width: 800px) {
+        width: 60%;
+        height: auto;
+      }
+  
+      @media (max-width: 500px) {
+        width: auto;
+        height: auto;
+      }
+     
+
+      input {
+        width: 80%;
+        height: 2.5rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        text-align: center;
+        margin: 2% auto;
+        border: 1px solid gray;
+      }
+
+      button {        
+        font-size: 1.2rem;
+        //width: 10vw;
+        width: 80%;
+        height: 3rem;
+        margin: 3% auto;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        //height: 2rem;
+        border-radius: 3px;
+        color: white;
+        //background: #2e4bb4;
+        //background: #2eb497;
+        transition: all .3s;
+        //box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.507);      
+        background-color: #282c34;   
+
+        &:hover {
+          //background: #4862c4;
+          background: #404247;
+        }
+        &:active {
+          transition: all .1s;
+          background: #798ac7;
+          transform: translateY(3px);
+          box-shadow: none;
+        }
+      }
+
+      
+    }
+    .login-description {
+      width: 80%;
+      margin: auto;
+      height: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.747);     
+      margin: 0px auto;
+
+      p {
+        color: gray;
+        font-size: 1.2rem;
+        margin-top: 0px;
+        margin-bottom: 0px;
+
+        a {
+          color: #4862c4;
+          text-decoration: underline;
+        }
+      }
+    }
+
+   
+  } // register-form-container
+}
