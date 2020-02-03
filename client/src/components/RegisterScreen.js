@@ -32,8 +32,7 @@ const RegisterScreen = (props) => {
     axios.post('https://lambda-mud-test.herokuapp.com/api/registration/', newUserInfo) 
       .then(res => {
         localStorage.setItem('token', res.data.key);
-        console.log("register res", res.data);
-        //axios.post('https://lambda-mud-test.herokuapp.com/api/login/', {email: newUserInfo.email, password: newUserInfo.password})
+        console.log("register res", res.data);        
         axios.post('https://lambda-mud-test.herokuapp.com/api/login/', 
         {username: newUserInfo.username, password: newUserInfo.password1})
           .then(res => {
