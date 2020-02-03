@@ -1,0 +1,86 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import logo from '../logo.svg';
+import '../styling/App.css';
+
+const LoginSignupScreen = (props) => {
+  /*const [loginCredentials, setLoginCredentials] = useState({
+    email: '',
+    password: ''
+  });*/
+
+  const [loginCredentials, setLoginCredentials] = useState({
+    username: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    setLoginCredentials({
+      ...loginCredentials,
+      [e.target.name]: e.target.value
+    })
+   
+  }
+
+  const handleSubmit = (e) => {
+    console.log('login creds: ', loginCredentials)
+    e.preventDefault();
+    axios.post(
+      'https://lambda-mud-test.herokuapp.com/api/login/', loginCredentials
+      )
+      .then(res => {
+        console.log(res)
+        localStorage.setItem('token', res.data.key);
+        //localStorage.setItem('token', res.data.token);
+        //localStorage.setItem('userId', res.data.user.id);
+        props.history.push('/dashboard');
+      })
+      .catch (err => {
+        console.log(err);
+      })
+  }
+
+  return (
+    <div className="login-screen">
+
+      <div className="login-form-container">
+
+        <h2 className="login-form-title">Sign In </h2>
+
+        {/*<img src={logo} className="App-logo" alt="logo" />*/}
+        
+        <form onSubmit={handleSubmit} className="login-form">
+          <input 
+          onChange={handleChange}
+          className="input-email"
+          //name="email"
+          name = "username"
+          //type="email"
+          type="text"
+          //placeholder="Email"
+          placeholder = "Username"
+          required
+          />
+          <input 
+          onChange={handleChange}
+          className="input-password"
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+          />          
+
+          <button>Sign In</button>
+        </form>
+
+        <div className="register-description">
+          <p>Don't have an account? Sign Up <Link to='/register'>Here</Link></p>
+        </div>
+        
+      </div>
+    </div>
+  );
+}
+
+export default LoginSignupScreen;
