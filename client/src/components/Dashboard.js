@@ -3,13 +3,13 @@ import axios from "axios";
 import Header from './Header';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import ReactVis from "./ReactVis.js";
+import Map from "../components/Map";
+  
+
 
 function Dashboard(){
 
     const [rooms, setRooms] = useState([])
-import Map from "../components/Map";
-
-function Dashboard(){
 
     const [moveInfo, setMoveInfo] =useState({
         name: "",
