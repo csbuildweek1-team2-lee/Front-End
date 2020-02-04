@@ -18,10 +18,8 @@ function Dashboard(){
         error_msg: ""
     })
 
-<<<<<<< HEAD
     const [rooms, setRooms] = useState([])
 
-=======
     const [resetInfo, setResetInfo]=useState({
         
             name: "",
@@ -31,7 +29,6 @@ function Dashboard(){
             error_msg: ""
         
     })
->>>>>>> 04f33d953f8ef44c62b7e7e3c0d1fb0b15534299
 
 
     useEffect(() => {
@@ -59,20 +56,6 @@ function Dashboard(){
                 console.log(err.message)
             })
 
-<<<<<<< HEAD
-            axiosWithAuth().get(
-                'https://lambda-mud-test.herokuapp.com/api/adv/rooms/'
-                )
-                .then(res => {
-                    let room_array=JSON.parse(res.data.rooms)
-                    setRooms(room_array)
-                    
-                })
-                .catch (err => {
-                    console.log(err.message)
-                })
-
-=======
         axiosWithAuth().get(
             'https://lambda-mud-test.herokuapp.com/api/adv/rooms'
             )
@@ -86,7 +69,6 @@ function Dashboard(){
             .catch (err => {
                 console.log(err.message)
             })
->>>>>>> 04f33d953f8ef44c62b7e7e3c0d1fb0b15534299
 
        
         axiosWithAuth()
