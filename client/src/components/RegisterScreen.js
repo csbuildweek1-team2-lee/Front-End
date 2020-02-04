@@ -37,6 +37,7 @@ const RegisterScreen = (props) => {
         {username: newUserInfo.username, password: newUserInfo.password1})
           .then(res => {
             localStorage.setItem('token', res.data.key);
+            localStorage.setItem("username", newUserInfo.username);
             props.history.push('/dashboard');
           })
           .catch(err => {

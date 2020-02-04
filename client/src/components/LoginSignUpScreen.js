@@ -28,12 +28,12 @@ const LoginSignupScreen = (props) => {
     e.preventDefault();
     axios.post(
       'https://lambda-mud-test.herokuapp.com/api/login/', loginCredentials
+      //'https://csbuildonelee.herokuapp.com/api/login', loginCredentials
       )
       .then(res => {
         console.log(res)
         localStorage.setItem('token', res.data.key);
-        //localStorage.setItem('token', res.data.token);
-        //localStorage.setItem('userId', res.data.user.id);
+        localStorage.setItem("username", loginCredentials.username);        
         props.history.push('/dashboard');
       })
       .catch (err => {
