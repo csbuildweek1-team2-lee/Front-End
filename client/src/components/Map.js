@@ -29,6 +29,7 @@ const Map=()=>{
         ]
     }
     )
+    console.log(Dashboard)
 
     return (
         <>{

@@ -13,15 +13,9 @@ function Dashboard(){
         players: [],
         error_msg: ""
     })
-    const [resetInfo, setResetInfo]=useState({
-        
-            name: "",
-            title: "",
-            description: "",
-            players: [],
-            error_msg: ""
-        
-    })
+
+    const [rooms, setRooms] = useState([])
+
 
 
     useEffect(() => {
@@ -36,6 +30,18 @@ function Dashboard(){
             .catch (err => {
                 console.log(err.message)
             })
+
+            axiosWithAuth().get(
+                'https://lambda-mud-test.herokuapp.com/api/adv/rooms/'
+                )
+                .then(res => {
+                    let room_array=JSON.parse(res.data.rooms)
+                    setRooms(room_array)
+                    
+                })
+                .catch (err => {
+                    console.log(err.message)
+                })
 
 
         axiosWithAuth()
@@ -67,7 +73,7 @@ function Dashboard(){
         });
     }
 
-
+    console.log(rooms)
     return(
         <div className = "dashboard-container">
             <Header /> 
