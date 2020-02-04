@@ -92,7 +92,7 @@ import {
           ]}*/
           
           data={[
-            {pk: 1, x: 1, y: 10, size: 3},
+            //{pk: 1, x: 1, y: 10, size: 3},
             {x: 5, y: 5, size: 20, style: {stroke: 'red', fill: 'orange'}}, //room 1
             {x: 5, y: 4}, //room 2
             {x: 5, y: 3}, //room 3

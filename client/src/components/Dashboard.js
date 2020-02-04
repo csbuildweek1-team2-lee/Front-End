@@ -3,13 +3,12 @@ import axios from "axios";
 import Header from './Header';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import ReactVis from "./ReactVis.js";
-import Map from "../components/Map";
-  
+import Map from "../components/Map"; 
 
 
 function Dashboard(){
 
-    const [rooms, setRooms] = useState([])
+    const [rooms, setRooms] = useState([]);
 
     const [moveInfo, setMoveInfo] =useState({
         name: "",
@@ -18,6 +17,7 @@ function Dashboard(){
         players: [],
         error_msg: ""
     })
+
     const [resetInfo, setResetInfo]=useState({
         
             name: "",
@@ -68,8 +68,6 @@ function Dashboard(){
                 console.log(err.message)
             })
 
-
-
        
         axiosWithAuth()
         .post(
@@ -83,7 +81,7 @@ function Dashboard(){
             console.log(error.message);
         });
 
-    }, [])
+    }, []);
 
     const Move=(dir)=>{
         axiosWithAuth()
@@ -103,16 +101,17 @@ function Dashboard(){
 
     return(
         <div className = "dashboard-container">
-            <Header /> 
-
-            <ReactVis rooms = {rooms}/>
+            <Header />             
 
             <div className = "dashboard-div">
 
                 <div className = "map">
-                    <div className="gridContainer">
-                    <Map />
-                    </div>
+
+                    {/*<div className="gridContainer">
+                        <Map />
+                    </div>*/}
+
+                    <ReactVis rooms = {rooms}/>
                    
 
                 </div>{/*end map*/}
@@ -122,9 +121,9 @@ function Dashboard(){
                     <div className = "rooms">
                         You are located in: <br/>{moveInfo.title}
                         <div className= "description">
-                        {moveInfo.description}
-                        <br/>
-                        <b>{moveInfo.error_msg}</b>
+                            {moveInfo.description}
+                            <br/>
+                            <b>{moveInfo.error_msg}</b>
                         </div>
 
                     </div>
@@ -138,19 +137,20 @@ function Dashboard(){
                     </div>
 
                     <div className = "directions">
-                    <button onClick={()=>Move("n")}>NORTH</button> 
-                    <button onClick={()=>Move("s")}>SOUTH</button> 
-                    <button onClick={()=>Move("e")}>EAST</button> 
-                    <button onClick={()=>Move("w")}>WEST</button>
+
+                        <button onClick={()=>Move("n")}>NORTH</button> 
+                        <button onClick={()=>Move("s")}>SOUTH</button> 
+                        <button onClick={()=>Move("e")}>EAST</button> 
+                        <button onClick={()=>Move("w")}>WEST</button>
 
                     </div>
 
                 </div>{/*end right-half*/}
 
-            </div>
+            </div>{/*end dashboard div*/}           
             
-        </div>
-    );
+        </div> );{/*end dashboard container*/}
+    
 
 }{/*end dashboard*/}
 
