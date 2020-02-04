@@ -1,9 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from './Header';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 function Dashboard(){
+
+    const [moveInfo, setMoveInfo] =useState({
+        name: "",
+        title: "",
+        description: "",
+        players: [],
+        error_msg: ""
+    })
 
     useEffect(() => {
        
@@ -21,10 +29,12 @@ function Dashboard(){
 
         axiosWithAuth()
         .post(
-            "https://lambda-mud-test.herokuapp.com/api/adv/move/", {direction: "n"}
+            "https://lambda-mud-test.herokuapp.com/api/adv/move/", {direction: "e"}
         )
         .then(res => {
             console.log("move result", res.data);
+            setMoveInfo(res.data)
+
             
         })
         .catch(error => {
@@ -32,6 +42,22 @@ function Dashboard(){
         });
 
     }, [])
+
+    const Move=(dir)=>{
+        axiosWithAuth()
+        .post(
+            "https://lambda-mud-test.herokuapp.com/api/adv/move/", {direction: `${dir}`}
+        )
+        .then(res => {
+            console.log("move result", res.data);
+            setMoveInfo(res.data)
+            
+        })
+        .catch(error => {
+            console.log(error.message);
+        });
+    }
+
 
     return(
         <div className = "dashboard-container">
@@ -49,7 +75,10 @@ function Dashboard(){
                 <div className = "right-half">
 
                     <div className = "rooms">
-                        rooms rooms rooms
+                        You are located in: {moveInfo.title}
+                        <div className= "description">
+                        {moveInfo.description}
+                        </div>
 
                     </div>
 
@@ -59,7 +88,10 @@ function Dashboard(){
                     </div>
 
                     <div className = "directions">
-                        directions directions directions
+                    <button onClick={()=>Move("n")}>NORTH</button> 
+                    <button onClick={()=>Move("s")}>SOUTH</button> 
+                    <button onClick={()=>Move("e")}>EAST</button> 
+                    <button onClick={()=>Move("w")}>WEST</button>
 
                     </div>
 
