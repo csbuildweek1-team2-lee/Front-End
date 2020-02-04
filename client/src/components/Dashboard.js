@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from './Header';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import Map from "../components/Map";
 
 function Dashboard(){
 
@@ -12,6 +13,16 @@ function Dashboard(){
         players: [],
         error_msg: ""
     })
+    const [resetInfo, setResetInfo]=useState({
+        
+            name: "",
+            title: "",
+            description: "",
+            players: [],
+            error_msg: ""
+        
+    })
+
 
     useEffect(() => {
        
@@ -33,9 +44,7 @@ function Dashboard(){
         )
         .then(res => {
             console.log("move result", res.data);
-            setMoveInfo(res.data)
-
-            
+            setMoveInfo(res.data);
         })
         .catch(error => {
             console.log(error.message);
@@ -66,8 +75,9 @@ function Dashboard(){
             <div className = "dashboard-div">
 
                 <div className = "map">
-                    map map map
-
+                    <div className="gridContainer">
+                    <Map />
+                    </div>
                    
 
                 </div>{/*end map*/}
@@ -75,15 +85,20 @@ function Dashboard(){
                 <div className = "right-half">
 
                     <div className = "rooms">
-                        You are located in: {moveInfo.title}
+                        You are located in: <br/>{moveInfo.title}
                         <div className= "description">
                         {moveInfo.description}
+                        <br/>
+                        <b>{moveInfo.error_msg}</b>
                         </div>
 
                     </div>
 
                     <div className = "players">
-                        players players players
+                        The following players are here:<br></br>
+                        {moveInfo.players.map(p =>{
+                            return(<>{p}, </>) //this needs to be in a scrolling text box
+                        })}
 
                     </div>
 

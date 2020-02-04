@@ -137,9 +137,40 @@
   
           }
 
+      
+
 
         }//end map
+        .grass{
+          border: 1px solid rgb(13, 143, 13);
+          width: 30px;
+          height: 30px;
+          background-color: green;
+        }
+        .wall{
+          border: 1px solid grey;
+          width: 30px;
+          height: 30px;
+          background-color: grey;
+        }
+        .current{
+          border: 1px solid red;
+          width: 30px;
+          height: 30px;
+          background-color: indigo;
+        }
 
+          .gridContainer{
+            display: flex;
+            align-content: stretch;
+            justify-content: center;
+            background-color: green;
+            flex-wrap: wrap;
+            height: 384px;
+            width: 384px;
+            border:2px solid goldenrod;
+
+          }
 
 
           
