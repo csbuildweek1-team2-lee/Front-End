@@ -26,6 +26,8 @@ const RegisterScreen = (props) => {
          
   };
 
+  // 'https://csbuildonelee.herokuapp.com/api/registration/'
+
   const handleSubmit = (e) => {
     console.log("new user info", newUserInfo)  
     e.preventDefault();    

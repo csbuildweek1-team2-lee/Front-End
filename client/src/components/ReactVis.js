@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
-import { FlexibleXYPlot, MarkSeries, LineSeries } from "react-vis";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+// import { FlexibleXYPlot, MarkSeries, LineSeries } from "react-vis";
+// import { axiosWithAuth } from "../utils/axiosWithAuth";
 import 'react-vis/dist/style.css';
 import mock_room_data from "../data/data.js";
 import all_rooms from "../data/dataExtended"

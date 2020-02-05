@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import logo from '../logo.svg';
 import '../styling/App.css';
 
 const LoginSignupScreen = (props) => {

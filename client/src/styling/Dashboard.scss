@@ -191,6 +191,7 @@
             display: flex;
             align-content: space-around;
             justify-content: center;
+            overflow-x: auto;
             background-image: url("../assets/Map800x800x32x32.bmp");
             background-size: contain;
             flex-wrap: wrap;
