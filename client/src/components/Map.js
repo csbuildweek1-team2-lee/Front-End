@@ -3,9 +3,12 @@ import axios from "axios";
 import Header from './Header';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import Dashboard from "../components/Dashboard";
+import mock_rooms from "../data/data"
+import all_rooms from "../data/dataExtended"
+// import Char from "../components/Move"
 
-const Map=()=>{
-    const [room, setRoom] = useState([])
+const Map=(props)=>{
+    const [rooms, setRooms] = useState([])
     const [roomID, setRoomID] = useState("")
     const [players, setPlayers] = useState("")
     const [dir, setDir] = useState("")
@@ -14,40 +17,49 @@ const Map=()=>{
 
     const [tiles, setTiles] =useState({
         tiles: [
-            2,2,2,2,2,2,2,2,2,2,2,2,
-            2,1,1,1,1,1,1,1,1,1,1,2,
-            2,1,1,1,1,1,1,1,1,1,1,2,
-            2,1,1,1,1,1,1,1,1,1,1,2,
-            2,1,1,1,1,1,1,1,1,1,1,2,
-            2,1,1,1,1,1,1,1,1,1,1,2,
-            2,1,1,1,1,1,1,1,1,1,1,2,
-            2,1,1,1,1,1,1,1,1,1,1,2,
-            2,1,1,1,1,1,1,1,1,1,1,2,
-            2,1,1,1,1,1,1,1,1,1,1,2,
-            2,1,1,1,1,1,1,1,1,1,1,2,
-            2,2,2,2,2,3,2,2,2,2,2,2
+            1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,0,0,1,1,1,1,
+            1,1,1,1,0,0,1,1,1,1,
+            1,1,1,1,0,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1
+
         ]
     }
     )
-    console.log(Dashboard)
+
+
+    useEffect(()=>{
+        axiosWithAuth().get(
+            'https://lambda-mud-test.herokuapp.com/api/adv/rooms'
+            )
+            .then(res => {
+                console.log("res.data: ", res.data);  
+                //have to use JSON.parse when reading from the test DB      
+                setRooms(JSON.parse(res.data.rooms));
+                console.log("json parse", JSON.parse(res.data.rooms));
+                
+            })
+            .catch (err => {
+                console.log(err.message)
+            })
+    },[])
+
+    console.log(all_rooms)
 
     return (
         <>{
-            tiles.tiles.map(tile =>{
-                if(tile==1){
-                return(
-                <div className="grass"></div>)
-                }
-                if (tile==2) {
-                return(<div className="wall"></div>)
-                }
-                else{
-                    if(tile==3){
-                        return(<div className="current">O</div>)
-                    }
-                }
+            
+            all_rooms.map(room=>{
+                return
             })
-            }</>
+
+            }
+</>
     )
 }
 

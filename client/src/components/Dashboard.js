@@ -4,6 +4,7 @@ import Header from './Header';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import ReactVis from "./ReactVis.js";
 import Map from "../components/Map"; 
+import character from "../assets/character.png"
 
 
 function Dashboard(){
@@ -18,8 +19,6 @@ function Dashboard(){
         error_msg: ""
     })
 
-    const [rooms, setRooms] = useState([])
-
     const [resetInfo, setResetInfo]=useState({
         
             name: "",
@@ -30,6 +29,8 @@ function Dashboard(){
         
     })
 
+    const [pos, setPos] = useState([-20,135])
+
 
     useEffect(() => {
        
@@ -38,52 +39,16 @@ function Dashboard(){
             )
             .then(res => {
                 console.log("init res", res.data)
-
-                axiosWithAuth()
-                .post(
-                    "https://lambda-mud-test.herokuapp.com/api/adv/move/", {direction: "n"}
-                )
-                .then(res => {
-                    console.log("move result", res.data);
-                    
-                })
-                .catch(error => {
-                    console.log(error.message);
-                });
+                setMoveInfo(res.data)
                 
             })
             .catch (err => {
                 console.log(err.message)
             })
 
-        axiosWithAuth().get(
-            'https://lambda-mud-test.herokuapp.com/api/adv/rooms'
-            )
-            .then(res => {
-                console.log("res.data: ", res.data);  
-                //have to use JSON.parse when reading from the test DB      
-                setRooms(JSON.parse(res.data.rooms));
-                console.log("json parse", JSON.parse(res.data.rooms));
-                
-            })
-            .catch (err => {
-                console.log(err.message)
-            })
+     }, []);
 
-       
-        axiosWithAuth()
-        .post(
-            "https://lambda-mud-test.herokuapp.com/api/adv/move/", {direction: "e"}
-        )
-        .then(res => {
-            console.log("move result", res.data);
-            setMoveInfo(res.data);
-        })
-        .catch(error => {
-            console.log(error.message);
-        });
-
-    }, []);
+     let increments = 125 //how many pixels we're moving. This will change with more rooms
 
     const Move=(dir)=>{
         axiosWithAuth()
@@ -93,6 +58,18 @@ function Dashboard(){
         .then(res => {
             console.log("move result", res.data);
             setMoveInfo(res.data)
+            if(res.data.error_msg==""){
+                if(`${dir}`== "n"){
+                    setPos([pos[0], pos[1] -increments])//subtract 125
+                }if(`${dir}`=="s"){
+                    setPos([pos[0],pos[1] +increments])
+                }if(`${dir}`=="e"){
+                    setPos([pos[0] + increments,pos[1]])
+                }if(`${dir}`=="w"){
+                    setPos([pos[0] -increments,pos[1]])
+                }
+            console.log("CURRENT POSITION",pos)
+            }
             
         })
         .catch(error => {
@@ -100,7 +77,6 @@ function Dashboard(){
         });
     }
 
-    console.log(rooms)
     return(
         <div className = "dashboard-container">
             <Header />             
@@ -109,11 +85,16 @@ function Dashboard(){
 
                 <div className = "map">
 
-                    {/*<div className="gridContainer">
-                        <Map />
-                    </div>*/}
+                        <div className="charContainer">
+                            <img src={character} className="char" style = {{top: pos[1] + "px", left: pos[0] + "px"}}></img>
+                        </div>
+                        <div className="gridContainer">
+                        {/* <Map />                     */}
+                        {/* <ReactVis rooms = {rooms}/> */}
+                    
 
-                    <ReactVis rooms = {rooms}/>
+                    </div>
+
                    
 
                 </div>{/*end map*/}

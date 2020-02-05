@@ -1,3 +1,5 @@
+
+
 .dashboard-container {
 
     display: flex;
@@ -107,6 +109,7 @@
             width: 90%;
             height: 30%;
             border: 1px solid red;
+            overflow: scroll;
 
             @media (max-width: 800px) {
               width: 100%;
@@ -143,35 +146,71 @@
         }//end map
         .grass{
           border: 1px solid rgb(13, 143, 13);
-          width: 30px;
-          height: 30px;
+          width: 40px;
+          height: 40px;
           background-color: green;
+        }
+        .npath{
+          border-top: 2px solid black;
+          // background-color: rgb(62, 63, 62);
+          width: 40px;
+          height:40px;
+        }
+        .spath{
+          border-bottom: 2px solid black;
+          // background-color: green;
+          width: 40px;
+          height:40px;
+        }
+        .epath{
+          border-right: 2px solid black;
+          // background-color: green;
+          width: 40px;
+          height:40px;
+        }
+        .wpath{
+          border-left: 2px solid black;
+          // background-color: green;
+          width: 40px;
+          height:40px;
         }
         .wall{
           border: 1px solid grey;
-          width: 30px;
-          height: 30px;
+          width: 40px;
+          height: 40px;
           background-color: grey;
         }
         .current{
           border: 1px solid red;
-          width: 30px;
-          height: 30px;
+          width: 40px;
+          height: 40px;
           background-color: indigo;
         }
 
           .gridContainer{
             display: flex;
-            align-content: stretch;
+            align-content: space-around;
             justify-content: center;
-            background-color: green;
+            background-image: url("../assets/Map800x800x32x32.bmp");
+            background-size: contain;
             flex-wrap: wrap;
-            height: 384px;
-            width: 384px;
+            height: 500px;
+            width: 500px;
             border:2px solid goldenrod;
 
           }
-
+          .charContainer{
+            position: absolute;
+            z-index: 100000;
+                       
+          }
+          .char{
+          position: absolute;
+          width: 40px;
+          height:40px;
+          // left: 0 + px; // THESE ARE SET DYNAMICALLY ON MOVE
+          // top: 0 + px;
+        } 
 
           
       }//end dashboard-div   
