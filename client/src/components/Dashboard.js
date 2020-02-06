@@ -53,28 +53,28 @@ function Dashboard(){
             setMoveInfo(res.data)
             if(res.data.error_msg===""){//if no error...
                 if(`${dir}`=== "n"){//and direction is North
-                    if(pos[1] +increments >= 740){ //checking to see if we're off the map
+                    if(pos[1] +increments > 740){ //checking to see if we're off the map
                         console.log("WE'RE OFF THE MAP")
                         return
                     }else{//if not, set to new position
                         setPos([pos[0], pos[1] +increments])
                     }
                 }if(`${dir}`==="s"){//and direction is South
-                    if(pos[1]-increments <= 20){ //checking to see if we're off the map
+                    if(pos[1]-increments < 20){ //checking to see if we're off the map
                         console.log("You're off the map")
                         return
                     }else{//if not, set to new position
                         setPos([pos[0],pos[1] -increments])
                     }
                 }if(`${dir}`==="e"){
-                    if(pos[0]+increments >= -40){ //checking to see if we're off the map
+                    if(pos[0]+increments > -40){ //checking to see if we're off the map
                         console.log("Off the map")
                         return
                     }else{//if not, set to new position
                         setPos([pos[0]+increments,pos[1]])
                     }
                 }if(`${dir}`==="w"){
-                    if(pos[0]-increments <= -800){ //checking to see if we're off the map
+                    if(pos[0]-increments < -800){ //checking to see if we're off the map
                         console.log("Off the map")
                     }else{//if not, set to new position
                         setPos([pos[0]-increments,pos[1]])
