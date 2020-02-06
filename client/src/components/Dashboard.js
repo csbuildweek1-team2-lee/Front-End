@@ -8,8 +8,6 @@ import character from "../assets/character.png"
 
 function Dashboard(){
 
-    // const [rooms, setRooms] = useState([]);
-
     const [moveInfo, setMoveInfo] =useState({
         name: "",
         title: "",
@@ -18,28 +16,17 @@ function Dashboard(){
         error_msg: ""
     })
 
-    // const [resetInfo, setResetInfo]=useState({
-        
-    //         name: "",
-    //         title: "",
-    //         description: "",
-    //         players: [],
-    //         error_msg: ""
-        
-    // })
-
-    const [pos, setPos] = useState([-20,135])
+    const [pos, setPos] = useState([-760, 20])
 
 
     useEffect(() => {
        
         axiosWithAuth().get(
-            'https://lambda-mud-test.herokuapp.com/api/adv/init/'
+            'https://csbuildonelee.herokuapp.com/api/adv/init/'
             )
             .then(res => {
                 console.log("init res", res.data)
                 setMoveInfo(res.data)
-                // setResetInfo(res.data)
                 
             })
             .catch (err => {
@@ -48,40 +35,40 @@ function Dashboard(){
 
      }, []);
 
-     let increments = 125 //how many pixels we're moving. This will change with more rooms
+     let increments = 80 //how many pixels we're moving. This will change with more rooms
 
     const Move=(dir)=>{
         axiosWithAuth()
         .post(
-            "https://lambda-mud-test.herokuapp.com/api/adv/move/", {direction: `${dir}`}
+            "https://csbuildonelee.herokuapp.com/api/adv/move/", {direction: `${dir}`}
         )
         .then(res => {
             console.log("move result", res.data);
             setMoveInfo(res.data)
             if(res.data.error_msg===""){//if no error...
                 if(`${dir}`=== "n"){//and direction is North
-                    if(pos[1] -increments <= -240){ //checking to see if we're off the map
+                    if(pos[1] +increments >= 740){ //checking to see if we're off the map
                         console.log("WE'RE OFF THE MAP")
                         return
                     }else{//if not, set to new position
-                        setPos([pos[0], pos[1] -increments])
+                        setPos([pos[0], pos[1] +increments])
                     }
                 }if(`${dir}`==="s"){//and direction is South
-                    if(pos[1]+increments >= 200){ //checking to see if we're off the map
+                    if(pos[1]-increments <= 20){ //checking to see if we're off the map
                         console.log("You're off the map")
                         return
                     }else{//if not, set to new position
-                        setPos([pos[0],pos[1] +increments])
+                        setPos([pos[0],pos[1] -increments])
                     }
                 }if(`${dir}`==="e"){
-                    if(pos[0]+increments >= 200){ //checking to see if we're off the map
+                    if(pos[0]+increments >= -40){ //checking to see if we're off the map
                         console.log("Off the map")
                         return
                     }else{//if not, set to new position
                         setPos([pos[0]+increments,pos[1]])
                     }
                 }if(`${dir}`==="w"){
-                    if(pos[0]-increments <= -240){ //checking to see if we're off the map
+                    if(pos[0]-increments <= -800){ //checking to see if we're off the map
                         console.log("Off the map")
                     }else{//if not, set to new position
                         setPos([pos[0]-increments,pos[1]])
@@ -97,30 +84,6 @@ function Dashboard(){
         });
     }
 
-    // const Reset=()=>{
-
-    //     let resetVar={
-    //     name: "",
-    //     title: "",
-    //     description: "",
-    //     players: [],
-    //     error_msg: ""
-    //     }
-    //     axiosWithAuth().get(
-    //         'https://lambda-mud-test.herokuapp.com/api/adv/init'
-    //         )
-    //         .then(res => {
-    //             console.log("RESET INIT", res.data)
-    //             setMoveInfo(resetVar)
-    //             //THIS IS NOT WORKING, MAYBE HAVE IT SET TO POSITION AND SEND IN STARTING ROOM COORDINATES WHEN DATA COMES IN
-                
-    //         })
-    //         .catch (err => {
-    //             console.log(err.message)
-    //         })
-
-    //     setPos([-20,135])
-    // }
 
     return(
         <div className = "dashboard-container">
@@ -129,18 +92,12 @@ function Dashboard(){
             <div className = "dashboard-div">
 
                 <div className = "map">
+                <Map />                                        
 
-                        <div className="charContainer">
-                            <img src={character} className="char" alt="character" style = {{top: pos[1] + "px", left: pos[0] + "px"}}></img>
-                        </div>
-                        <div className="gridContainer">
-                        <Map />                    
-                        {/* <ReactVis rooms = {rooms}/> */}
-                    
 
-                    </div>
-
-                   
+                <div className="charContainer">
+                    <img src={character} className="char" alt="character" style = {{bottom: pos[1] + "px", left: pos[0] + "px"}}></img>
+                </div>
 
                 </div>{/*end map*/}
 
@@ -170,13 +127,15 @@ function Dashboard(){
                         <button onClick={()=>Move("s")}>SOUTH</button> 
                         <button onClick={()=>Move("e")}>EAST</button> 
                         <button onClick={()=>Move("w")}>WEST</button>
-                        {/* <button onClick={()=>Reset()}>RESET</button> */}
 
                     </div>
 
                 </div>{/*end right-half*/}
 
-            </div>{/*end dashboard div*/}           
+            </div>{/*end dashboard div*/}
+            {/* <div className="gridContainer">
+            <Map />                                        
+            </div>            */}
             
         </div> );{/*end dashboard container*/}
     
