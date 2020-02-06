@@ -22,9 +22,9 @@
 
    
       .dashboard-div {
-        border: 4px solid green;
-        width: 100%;
-        height: 800px;
+        border: 1px solid green;
+        width: 80%;
+        height: 600px;
         display: flex;
         flex-direction: row;
         flex-wrap: no-wrap;
@@ -72,7 +72,7 @@
         .right-half {
           width: 35%;
           height: 100%;
-          border: 1px solid purple;
+          //border: 1px solid purple;
           display: flex;
           flex-direction: column;
           justify-content: space-evenly;
@@ -104,6 +104,27 @@
               width: 100%;
               height: 100%;
             }
+
+            h3 {
+              font-family: 'Jim Nightshade', cursive; 
+              font-size: 2rem;
+            }
+  
+          }
+
+          .error-msg{
+            width: 90%;
+            height: 10%;                       
+
+            @media (max-width: 800px) {
+              width: 100%;
+              height: 100%;
+            }
+        
+            @media (max-width: 500px) {
+              width: 100%;
+              height: 100%;
+            }            
   
           }
 
@@ -122,13 +143,22 @@
               width: 100%;
               height: 100%;
             }
+
+            h3 {
+              font-family: 'Jim Nightshade', cursive; 
+              font-size: 2rem;
+            }
   
           }
 
           .directions{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
             width: 90%;
             height: 30%;
-            border: 1px solid red;
+            border: 1px solid goldenrod;
 
             @media (max-width: 800px) {
               width: 100%;
@@ -139,8 +169,55 @@
               width: 100%;
               height: 100%;
             }
+
+            .north{
+              margin-top: 5%;
+              height: 30%;
+            }
+
+            .east-west{             
+              height: 30%;
+
+              .west-btn {
+                margin-right: 5%;
+              }
+            }
+
+            .south{
+              height: 30%;
+            } 
+            
+            button {                   
+              
+              background: #212229;
+              text-align: center;
+              padding: 5px 5px;
+              border-radius: 3px;
+              //border: 1px solid goldenrod;
+              color: white;              
+              cursor: pointer;
+             
+          
+              &:hover {
+                background: black;
+                color: white;
+              }
+              
+              
+              @media (max-width: 800px) {              
+                width: 100%;    
+                
+              }
+          
+              @media (max-width: 500px) {              
+                width: 100%;
+                
+              }
+          
+            }
+          
   
-          }
+          }//end directions
 
       
 

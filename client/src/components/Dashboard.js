@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Icon, Card, Modal, Popup, Message } from "semantic-ui-react";
+import 'semantic-ui-css/semantic.css'; 
+import 'semantic-ui-css/semantic.min.css'; 
+import axios from "axios";
 import Header from './Header';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 // import ReactVis from "./ReactVis.js";
@@ -158,43 +162,86 @@ function checkKey(e) {
 
                 <div className = "right-half">
 
-                    <div className = "rooms">
-                        You are located in: <br/>{moveInfo.title}
-                        <div className= "description">
-                            {moveInfo.description}
-                            <br/>
-                            <b>{moveInfo.error_msg}</b>
-                        </div>
+                    {/*<div className = "rooms">*/}
+                        <Card className = "rooms" style={{overflow: 'auto'}}>
+                            <Card.Content>
+                                <h3>
+                                    {moveInfo.title}
+                                </h3>
 
-                    </div>
+                                <Card.Description>
+                                    
+                                    <div className= "description">
+                                        {moveInfo.description}                                        
+                                    </div>
+                                </Card.Description>
 
-                    <div className = "players">                        
+                            </Card.Content>
+
+                        </Card>
+
+                    {/*</div>*/}    
+
+                    {/*error msg*/}
+                    
+                    {moveInfo.error_msg && moveInfo.error_msg.length > 0 ?                                 
+                        <Message className = "error-msg" color='red'>{moveInfo.error_msg}</Message>  
+                    :
+                    null}  
+                    
+
+                    {/*<div className = "players">  */}
+
+                    <Card className = "players" style={{overflow: 'auto'}}>
+                        <Card.Content>
+                            <h3>
+                                Players
+                            </h3>
+
+                            <Card.Description>  
+                    
+                                        
                         {
                             moveInfo.players.length === 0 ? <p>Oh No! You are alone here!!</p> : 
-                            <>The following players are here:<br></br>
+                            <>
                             {moveInfo.players.map(p =>{
                                 return(<>{p}, </>) //this needs to be in a scrolling text box
                             })}
                             </>
                         }
+                            </Card.Description>
+
+                        </Card.Content>
+
+                    </Card>
                         
 
-                    </div>
+                    {/*</div>*/}
 
-                    <div className = "directions">
+                   {/* <div className = "directions">*/}
+
+                    <Card className = "directions">
+                            <Card.Content>                                
+                                
 
                         <div className = "north"> <button onClick={()=>Move("n")}>NORTH</button> </div>
 
-                        <div className = "south-east"> 
-                            <button onClick={()=>Move("s")}>SOUTH</button> 
-                            <button onClick={()=>Move("e")}>EAST</button> 
+                        <div className = "east-west"> 
+                            <button className = "west-btn" onClick={()=>Move("w")}>WEST</button>
+                            <button onClick={()=>Move("e")}>EAST</button>                                                       
+                             
                         </div>
 
-                        <div className = "west">                     
-                            <button onClick={()=>Move("w")}>WEST</button>
-                        </div>
+                        <div className = "south"> 
+                            <button onClick={()=>Move("s")}>SOUTH</button>    
+                           
+                        </div>                               
 
-                    </div>
+                        </Card.Content>
+
+                    </Card>
+
+                    {/* </div>*/}
 
                 </div>{/*end right-half*/}
 
