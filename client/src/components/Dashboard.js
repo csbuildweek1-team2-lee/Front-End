@@ -5,6 +5,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import Map from "../components/Map"; 
 import character from "../assets/character.png"
 // import Grid from "../components/Grid";
+import room_names from "../data/room_names"
 
 
 function Dashboard(){
@@ -21,19 +22,38 @@ function Dashboard(){
     })
 
     const [pos, setPos] = useState([-760, 20])
+    console.log(room_names[0].pos[0]+"px", room_names[0].pos[1]+"px")//position from data
+    console.log(room_names[0].room)//room name from data
 
     useEffect(() => {
 
         axiosWithAuth().get(
-            //'https://lambda-mud-test.herokuapp.com/api/adv/init/'
             'https://csbuildonelee.herokuapp.com/api/adv/init'
             )
             .then(res => {
                 console.log("init res", res.data);  
                 setMoveInfo(res.data);     
-                setMoveErrorMsg(res.data.error_msg);                       
+                setMoveErrorMsg(res.data.error_msg);
+
+                room_names.map(room=>{
+                    // console.log(room.room)
+                    // console.log("current BE ROOM",res.data.title)
+                    const beRoom=res.data.title
+                    const feRoom=room.room
+                    if(beRoom===feRoom){
+                        console.log("Old Pos", pos)
+                        setPos([room.pos[0], room.pos[1]])
+                        console.log("WE FOUND A MATCH")
+                        console.log("These are new coordinates",[room.pos[0], room.pos[1]])
+                        console.log("NewPosition",pos)
+                    }else{
+                        return
+                    }
+                })
+                
                 
             })
+            
             .catch (err => {
                 console.log(err.message)
             })
@@ -114,10 +134,10 @@ function checkKey(e) {
 
 
     return(
-        <div className = "dashboard-container">
+        <div className = "dashboard-container" key="key">
             <Header />           
 
-            <div className = "dashboard-div">
+            <div className = "dashboard-div" key="key">
 
                 <div className = "map">
                 <Map />

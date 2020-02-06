@@ -1,4 +1,4 @@
-room_names = [
+const room_names = [
 
 {room: "The Creepy Mine",
 pos: [-760,20]},
@@ -302,3 +302,4 @@ pos: [-680,740]},
 {room: "The Small Rift of Flame",
 pos: [-760,740]}
 ]
+export default room_names;
