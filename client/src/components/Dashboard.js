@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Icon, Card, Modal, Popup, Message } from "semantic-ui-react";
+import {Card, Message } from "semantic-ui-react";
 import 'semantic-ui-css/semantic.css'; 
 import 'semantic-ui-css/semantic.min.css'; 
-import axios from "axios";
 import Header from './Header';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-// import ReactVis from "./ReactVis.js";
 import Map from "../components/Map"; 
 import character from "../assets/character.png"
-// import Grid from "../components/Grid";
 import room_names from "../data/room_names"
+import Confetti from 'react-confetti';
+
+import {
+    useWindowSize} from '@react-hook/window-size'
 
 
 function Dashboard(){
 
-    const [rooms, setRooms] = useState([]);    
     const [moveErrorMsg, setMoveErrorMsg] = useState();
-    const [initInfo, setInitInfo] = useState()
     const [moveInfo, setMoveInfo] =useState({
         name: "",
         title: "",
@@ -26,8 +25,7 @@ function Dashboard(){
     })
 
     const [pos, setPos] = useState([-760, 20])
-    console.log(room_names[0].pos[0]+"px", room_names[0].pos[1]+"px")//position from data
-    console.log(room_names[0].room)//room name from data
+    const { width, height } = useWindowSize();
 
     useEffect(() => {
 
@@ -121,18 +119,30 @@ function checkKey(e) {
 
     e = e || window.event;
 
-    if (e.keyCode == '38') {
+    if (e.keyCode === '38') {
         Move("n")
     }
-    else if (e.keyCode == '40') {
+    else if (e.keyCode === '40') {
         Move("s")
     }
-    else if (e.keyCode == '37') {
+    else if (e.keyCode === '37') {
        Move("w")
     }
-    else if (e.keyCode == '39') {
+    else if (e.keyCode === '39') {
        Move("e")
     }
+    else if (e.keyCode === '78') {
+        Move("n")
+     }
+     else if (e.keyCode === '83') {
+        Move("s")
+     }
+     else if (e.keyCode === '69') {
+        Move("e")
+     }
+     else if (e.keyCode === '87') {
+        Move("w")
+     }
 
 }
 
@@ -144,11 +154,27 @@ function checkKey(e) {
             <div className = "dashboard-div" key="key">
 
                 <div className = "map">
-                <Map />
+                    <Map />
+                    <div className="confetti">
+                        {moveInfo.title === "The Small Rift of Flame" ? 
+                                <div style={{width: 50}}> 
+                                    <Confetti
+                                        width={width}
+                                        height={height}
+                                    /> 
+                                </div>   
+                                :
+
+                                    null}
+                            </div> 
 
                     <div className="charContainer">
                         <img src={character} className="char" alt="character" style = {{bottom: pos[1] + "px", left: pos[0] + "px"}}></img>
                     </div>
+                    
+
+
+
                     {/*<div className="gridContainer">
                         <Map />
                     </div>*/}
