@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import logo from '../logo.svg';
 import '../styling/App.css';
 
-const LoginSignupScreen = (props) => {
-  /*const [loginCredentials, setLoginCredentials] = useState({
-    email: '',
-    password: ''
-  });*/
+const LoginSignupScreen = (props) => { 
 
   const [loginCredentials, setLoginCredentials] = useState({
     username: '',
@@ -27,13 +22,13 @@ const LoginSignupScreen = (props) => {
     console.log('login creds: ', loginCredentials)
     e.preventDefault();
     axios.post(
-      'https://lambda-mud-test.herokuapp.com/api/login/', loginCredentials
+      //'https://lambda-mud-test.herokuapp.com/api/login/', loginCredentials
+      'https://csbuildonelee.herokuapp.com/api/login/', loginCredentials
       )
       .then(res => {
         console.log(res)
         localStorage.setItem('token', res.data.key);
-        //localStorage.setItem('token', res.data.token);
-        //localStorage.setItem('userId', res.data.user.id);
+        localStorage.setItem("username", loginCredentials.username);        
         props.history.push('/dashboard');
       })
       .catch (err => {
@@ -53,12 +48,9 @@ const LoginSignupScreen = (props) => {
         <form onSubmit={handleSubmit} className="login-form">
           <input 
           onChange={handleChange}
-          className="input-email"
-          //name="email"
-          name = "username"
-          //type="email"
-          type="text"
-          //placeholder="Email"
+          className="input-email"          
+          name = "username"         
+          type="text"          
           placeholder = "Username"
           required
           />
@@ -71,7 +63,7 @@ const LoginSignupScreen = (props) => {
           required
           />          
 
-          <button>Sign In</button>
+          <button>Enter</button>
         </form>
 
         <div className="register-description">

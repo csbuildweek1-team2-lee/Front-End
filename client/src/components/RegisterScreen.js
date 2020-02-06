@@ -26,17 +26,20 @@ const RegisterScreen = (props) => {
          
   };
 
+  // 'https://csbuildonelee.herokuapp.com/api/registration/'
+
   const handleSubmit = (e) => {
     console.log("new user info", newUserInfo)  
     e.preventDefault();    
-    axios.post('https://lambda-mud-test.herokuapp.com/api/registration/', newUserInfo) 
+    axios.post('https://csbuildonelee.herokuapp.com/api/registration/', newUserInfo) 
       .then(res => {
         localStorage.setItem('token', res.data.key);
         console.log("register res", res.data);        
-        axios.post('https://lambda-mud-test.herokuapp.com/api/login/', 
+        axios.post('https://csbuildonelee.herokuapp.com/api/login/', 
         {username: newUserInfo.username, password: newUserInfo.password1})
           .then(res => {
             localStorage.setItem('token', res.data.key);
+            localStorage.setItem("username", newUserInfo.username);
             props.history.push('/dashboard');
           })
           .catch(err => {
