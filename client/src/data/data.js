@@ -17,7 +17,8 @@ const mockRooms = {
 
         {
             "model": "adventure.room", 
-            "pk": 2, "fields": {
+            "pk": 2, 
+            "fields": {
                 "title": "Foyer", 
                 "description": "Dim light filters in from the south. Dusty\npassages run north and east.", 
                 "x": 5,

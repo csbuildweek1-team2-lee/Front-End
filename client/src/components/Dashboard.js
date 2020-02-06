@@ -4,10 +4,14 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 // import ReactVis from "./ReactVis.js";
 import Map from "../components/Map"; 
 import character from "../assets/character.png"
+// import Grid from "../components/Grid";
 
 
 function Dashboard(){
 
+    const [rooms, setRooms] = useState([]);    
+    const [moveErrorMsg, setMoveErrorMsg] = useState();
+    const [initInfo, setInitInfo] = useState()
     const [moveInfo, setMoveInfo] =useState({
         name: "",
         title: "",
@@ -18,26 +22,28 @@ function Dashboard(){
 
     const [pos, setPos] = useState([-760, 20])
 
-
     useEffect(() => {
-       
+
         axiosWithAuth().get(
-            'https://csbuildonelee.herokuapp.com/api/adv/init/'
+            //'https://lambda-mud-test.herokuapp.com/api/adv/init/'
+            'https://csbuildonelee.herokuapp.com/api/adv/init'
             )
             .then(res => {
-                console.log("init res", res.data)
-                setMoveInfo(res.data)
+                console.log("init res", res.data);  
+                setMoveInfo(res.data);     
+                setMoveErrorMsg(res.data.error_msg);                       
                 
             })
             .catch (err => {
                 console.log(err.message)
             })
 
-     }, []);
+    }, []);
+    
 
-    let increments = 80 //how many pixels we're moving. This will change with more rooms
+    let increments = 80
+    const Move=(dir)=>{        
 
-    const Move=(dir)=>{
         axiosWithAuth()
         .post(
             "https://csbuildonelee.herokuapp.com/api/adv/move/", {direction: `${dir}`}
@@ -109,7 +115,7 @@ function checkKey(e) {
 
     return(
         <div className = "dashboard-container">
-            <Header />             
+            <Header />           
 
             <div className = "dashboard-div">
 
@@ -119,6 +125,14 @@ function checkKey(e) {
                     <div className="charContainer">
                         <img src={character} className="char" alt="character" style = {{bottom: pos[1] + "px", left: pos[0] + "px"}}></img>
                     </div>
+                    {/*<div className="gridContainer">
+                        <Map />
+                    </div>*/}
+
+                    {/*<ReactVis rooms = {rooms} currentRoom = {moveInfo.title} />*/}
+
+                    {/* <Grid currentRoom = {moveInfo.title}/> */}
+                   
 
                 </div>{/*end map*/}
 
@@ -134,20 +148,31 @@ function checkKey(e) {
 
                     </div>
 
-                    <div className = "players">
-                        The following players are here:<br></br>
-                        {moveInfo.players.map(p =>{
-                            return(<p key={p}>{p}</p>) //this needs to be in a scrolling text box
-                        })}
+                    <div className = "players">                        
+                        {
+                            moveInfo.players.length === 0 ? <p>Oh No! You are alone here!!</p> : 
+                            <>The following players are here:<br></br>
+                            {moveInfo.players.map(p =>{
+                                return(<>{p}, </>) //this needs to be in a scrolling text box
+                            })}
+                            </>
+                        }
+                        
 
                     </div>
 
                     <div className = "directions">
 
-                        <button onClick={()=>Move("n")}>NORTH</button> 
-                        <button onClick={()=>Move("s")}>SOUTH</button> 
-                        <button onClick={()=>Move("w")}>WEST</button>
-                        <button onClick={()=>Move("e")}>EAST</button> 
+                        <div className = "north"> <button onClick={()=>Move("n")}>NORTH</button> </div>
+
+                        <div className = "south-east"> 
+                            <button onClick={()=>Move("s")}>SOUTH</button> 
+                            <button onClick={()=>Move("e")}>EAST</button> 
+                        </div>
+
+                        <div className = "west">                     
+                            <button onClick={()=>Move("w")}>WEST</button>
+                        </div>
 
                     </div>
 
