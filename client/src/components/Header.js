@@ -14,19 +14,9 @@ const Header = (props) => {
       
       <h2>The Infinite Fortress</h2>
 
-      <button onClick = {logout} className = "notifications-reject-btn">
+      <button onClick = {logout} className = "logout-btn">
           Exit
-      </button>
-
-      <Router>
-        
-        
-       
-      <Route exact path="/" component={LoginSignUpScreen}/>
-              
-        
-     
-    </Router>
+      </button>      
 
     </div>
   );
