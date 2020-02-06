@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Icon, Card, Modal, Popup } from "semantic-ui-react";
+import { Icon, Card, Modal, Popup, Message } from "semantic-ui-react";
 import 'semantic-ui-css/semantic.css'; 
 import 'semantic-ui-css/semantic.min.css'; 
 import axios from "axios";
@@ -101,9 +101,7 @@ function Dashboard(){
                                 <Card.Description>
                                     
                                     <div className= "description">
-                                        {moveInfo.description}
-                                        <br/>
-                                        <b>{moveInfo.error_msg}</b>
+                                        {moveInfo.description}                                        
                                     </div>
                                 </Card.Description>
 
@@ -111,7 +109,15 @@ function Dashboard(){
 
                         </Card>
 
-                    {/*</div>*/}
+                    {/*</div>*/}    
+
+                    {/*error msg*/}
+                    
+                    {moveInfo.error_msg && moveInfo.error_msg.length > 0 ?                                 
+                        <Message className = "error-msg" color='red'>{moveInfo.error_msg}</Message>  
+                    :
+                    null}  
+                    
 
                     {/*<div className = "players">  */}
 
@@ -158,9 +164,7 @@ function Dashboard(){
                         <div className = "south"> 
                             <button onClick={()=>Move("s")}>SOUTH</button>    
                            
-                        </div>
-
-                               
+                        </div>                               
 
                         </Card.Content>
 

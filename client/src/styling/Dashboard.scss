@@ -22,7 +22,7 @@
       .dashboard-div {
         border: 1px solid green;
         width: 80%;
-        height: 500px;
+        height: 600px;
         display: flex;
         flex-direction: row;
         flex-wrap: no-wrap;
@@ -105,6 +105,22 @@
               font-family: 'Jim Nightshade', cursive; 
               font-size: 2rem;
             }
+  
+          }
+
+          .error-msg{
+            width: 90%;
+            height: 10%;                       
+
+            @media (max-width: 800px) {
+              width: 100%;
+              height: 100%;
+            }
+        
+            @media (max-width: 500px) {
+              width: 100%;
+              height: 100%;
+            }            
   
           }
 
