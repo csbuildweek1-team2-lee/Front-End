@@ -1,7 +1,16 @@
 import React, {useState, useEffect} from "react";
 import dungeon_room_data from "../data/rooms.js";
+import Confetti from 'react-confetti';
 
-function Grid(props){    
+import {
+    useWindowSize,
+    useWindowWidth,
+    useWindowHeight,
+} from '@react-hook/window-size'
+
+function Grid(props){
+    
+    const { width, height } = useWindowSize();
 
     const [roomData, setRoomData] = useState([]);
 
@@ -58,18 +67,35 @@ function Grid(props){
        
 
         return props.currentRoom === name ?                 
-        <div key = {index} id = {name} className = "tile-selected"> </div>
+        <div key = {index} id = {name} className = "tile-selected"> </div>               
         :
         <div key = {index} id = {name} className = "tile"> </div>
+
         
     })
      
    
     return (
 
-        <div className="grid">            
+        <div className="grid">              
                 
-            {flexGrid}
+            {flexGrid} 
+
+            {props.currentRoom === "The Small Rift of Flame" ? 
+
+                <div style={{width: 50}}> 
+
+                    <Confetti
+                        width={width}
+                        height={height}
+                    /> 
+                    
+
+                </div>   
+            :
+
+            null}        
+
 
         </div>    
 
