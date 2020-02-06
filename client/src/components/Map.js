@@ -1,25 +1,10 @@
 import React, { useEffect, useState} from "react";
-// import axios from "axios";
 import Header from './Header';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-// import Dashboard from "../components/Dashboard";
-// import mock_rooms from "../data/data"
 import all_rooms from "../data/dataExtended"
-// import Char from "../components/Move"
 
 const Map=(props)=>{
     const [rooms, setRooms] = useState([])
-    // const [roomID, setRoomID] = useState("")
-    // const [players, setPlayers] = useState("")
-    // const [dir, setDir] = useState("")
-    // const [move, setMove] = useState("")
-    //above may just need to be an object containing all this info
-
-    //0: GRASS path
-    //1: ROOM
-    //2: dirt/trees
-    //3: tree
-    //
 
     const tiles = [
         [6, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
@@ -62,7 +47,6 @@ const Map=(props)=>{
         //     })
     },[])
 
-const grass= "client/src/assets/GrassTile.png"
 
 function getTileSprite(type){
     switch(type){
@@ -83,10 +67,6 @@ function getTileSprite(type){
                         
                 }
 }
-  
-
-
-
     return (
         <>
         {tiles.map((row, i)=>(

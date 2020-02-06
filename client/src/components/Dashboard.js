@@ -35,7 +35,7 @@ function Dashboard(){
 
      }, []);
 
-     let increments = 80 //how many pixels we're moving. This will change with more rooms
+    let increments = 80 //how many pixels we're moving. This will change with more rooms
 
     const Move=(dir)=>{
         axiosWithAuth()
@@ -85,6 +85,28 @@ function Dashboard(){
     }
 
 
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+
+    e = e || window.event;
+
+    if (e.keyCode == '38') {
+        Move("n")
+    }
+    else if (e.keyCode == '40') {
+        Move("s")
+    }
+    else if (e.keyCode == '37') {
+       Move("w")
+    }
+    else if (e.keyCode == '39') {
+       Move("e")
+    }
+
+}
+
+
     return(
         <div className = "dashboard-container">
             <Header />             
@@ -92,12 +114,11 @@ function Dashboard(){
             <div className = "dashboard-div">
 
                 <div className = "map">
-                <Map />                                        
+                <Map />
 
-
-                <div className="charContainer">
-                    <img src={character} className="char" alt="character" style = {{bottom: pos[1] + "px", left: pos[0] + "px"}}></img>
-                </div>
+                    <div className="charContainer">
+                        <img src={character} className="char" alt="character" style = {{bottom: pos[1] + "px", left: pos[0] + "px"}}></img>
+                    </div>
 
                 </div>{/*end map*/}
 
@@ -125,17 +146,15 @@ function Dashboard(){
 
                         <button onClick={()=>Move("n")}>NORTH</button> 
                         <button onClick={()=>Move("s")}>SOUTH</button> 
-                        <button onClick={()=>Move("e")}>EAST</button> 
                         <button onClick={()=>Move("w")}>WEST</button>
+                        <button onClick={()=>Move("e")}>EAST</button> 
 
                     </div>
 
                 </div>{/*end right-half*/}
 
             </div>{/*end dashboard div*/}
-            {/* <div className="gridContainer">
-            <Map />                                        
-            </div>            */}
+            
             
         </div> );{/*end dashboard container*/}
     
