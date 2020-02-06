@@ -1,54 +1,81 @@
-// var map = {
-//     cols: 10,
-//     rows: 10,
-//     tsize: 100,
-//     tiles: [
-//         1,1,1,1,1,1,1,1,1,1,
-//         1,1,1,1,1,1,1,1,1,1,
-//         1,1,1,1,1,1,1,1,1,1,
-//         1,1,1,1,1,1,1,1,1,1,
-//         1,1,1,1,1,1,1,1,1,1,
-//         1,1,1,1,1,1,1,1,1,1,
-//         1,1,1,1,1,1,1,1,1,1,
-//         1,1,1,1,1,1,1,1,1,1,
-//         1,1,1,1,1,1,1,1,1,1,
-//         1,1,1,1,1,1,1,1,1,1
-//     ],
-//     getTile: function (col, row) {
-//         return this.tiles[row * map.cols + col];
-//     }
-// };
+import React, {useState, useEffect} from "react";
+import dungeon_room_data from "../data/rooms.js";
 
-// Game.load = function () {
-//     return [
-//         Loader.loadImage('tiles', '../assets/tiles.png')
-//     ];
-// };
+function Grid(props){    
 
-// Game.init = function () {
-//     this.tileAtlas = Loader.getImage('tiles');
-// };
+    const [roomData, setRoomData] = useState([]);
 
-// Game.update = function (delta) {
-// };
+    const [roomNames, setRoomNames] = useState([]);
 
-// Game.render = function () {
-//     for (var c = 0; c < map.cols; c++) {
-//         for (var r = 0; r < map.rows; r++) {
-//             var tile = map.getTile(c, r);
-//             if (tile !== 0) { // 0 => empty tile
-//                 this.ctx.drawImage(
-//                     this.tileAtlas, // image
-//                     (tile - 1) * map.tsize, // source x
-//                     0, // source y
-//                     map.tsize, // source width
-//                     map.tsize, // source height
-//                     c * map.tsize,  // target x
-//                     r * map.tsize, // target y
-//                     map.tsize, // target width
-//                     map.tsize // target height
-//                 );
-//             }
-//         }
-//     }
-// };
+    useEffect( () => {      
+        
+        setRoomNames(dungeon_room_data.rooms)
+        
+        roomNames.map(mock_room => {
+            console.log("room names", mock_room);    
+
+        }) 
+
+    }, [])   
+      
+
+    var Tile = function(x, y) {
+        this.x = x;
+        this.y = y;
+        this.width = 50;
+    };
+
+   
+    var newTiles = [];
+
+    var NUM_COLS = 10;
+    var NUM_ROWS = 10;
+
+    var tiles = new Array(NUM_COLS).fill(0)   
+
+    tiles = tiles.map(arr=>{
+        arr = new Array(NUM_ROWS).fill({x: 0, y: 0})
+        return arr
+    })
+
+    tiles = tiles.map((tile, index1) => {
+        
+        return tile.map( (newTile, index2) => {           
+           
+            newTile.x = index1 + 1
+            newTile.y = index2 + 1
+            
+           
+            return <div className = "tile">{newTile.x},{newTile.y} </div>
+        })
+
+    })
+     
+
+    var flexGrid = roomNames.map( (name, index ) => {  
+
+        let classStyles = "";       
+       
+
+        return props.currentRoom === name ?                 
+        <div key = {index} id = {name} className = "tile-selected"> </div>
+        :
+        <div key = {index} id = {name} className = "tile"> </div>
+        
+    })
+     
+   
+    return (
+
+        <div className="grid">            
+                
+            {flexGrid}
+
+        </div>    
+
+    );
+
+
+}//end Grid
+
+export default Grid;

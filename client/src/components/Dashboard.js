@@ -4,12 +4,14 @@ import Header from './Header';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import ReactVis from "./ReactVis.js";
 import Map from "../components/Map"; 
+import Grid from "../components/Grid";
 
 
 function Dashboard(){
 
-    const [rooms, setRooms] = useState([]);
-
+    const [rooms, setRooms] = useState([]);    
+    const [moveErrorMsg, setMoveErrorMsg] = useState();
+    const [initInfo, setInitInfo] = useState()
     const [moveInfo, setMoveInfo] =useState({
         name: "",
         title: "",
@@ -28,65 +30,31 @@ function Dashboard(){
         
     })
 
-
     useEffect(() => {
-       
+
         axiosWithAuth().get(
-            'https://lambda-mud-test.herokuapp.com/api/adv/init/'
+            //'https://lambda-mud-test.herokuapp.com/api/adv/init/'
+            'https://csbuildonelee.herokuapp.com/api/adv/init'
             )
             .then(res => {
-                console.log("init res", res.data)
-
-                axiosWithAuth()
-                .post(
-                    "https://lambda-mud-test.herokuapp.com/api/adv/move/", {direction: "n"}
-                )
-                .then(res => {
-                    console.log("move result", res.data);
-                    
-                })
-                .catch(error => {
-                    console.log(error.message);
-                });
+                console.log("init res", res.data);  
+                setMoveInfo(res.data);     
+                setMoveErrorMsg(res.data.error_msg);                       
                 
             })
             .catch (err => {
                 console.log(err.message)
             })
-
-        axiosWithAuth().get(
-            'https://lambda-mud-test.herokuapp.com/api/adv/rooms'
-            )
-            .then(res => {
-                console.log("res.data: ", res.data);  
-                //have to use JSON.parse when reading from the test DB      
-                setRooms(JSON.parse(res.data.rooms));
-                console.log("json parse", JSON.parse(res.data.rooms));
-                
-            })
-            .catch (err => {
-                console.log(err.message)
-            })
-
-       
-        axiosWithAuth()
-        .post(
-            "https://lambda-mud-test.herokuapp.com/api/adv/move/", {direction: "e"}
-        )
-        .then(res => {
-            console.log("move result", res.data);
-            setMoveInfo(res.data);
-        })
-        .catch(error => {
-            console.log(error.message);
-        });
 
     }, []);
+    
 
-    const Move=(dir)=>{
+    const Move=(dir)=>{        
+
         axiosWithAuth()
         .post(
-            "https://lambda-mud-test.herokuapp.com/api/adv/move/", {direction: `${dir}`}
+            //"https://lambda-mud-test.herokuapp.com/api/adv/move/", {direction: `${dir}`}
+            'https://csbuildonelee.herokuapp.com/api/adv/move', {direction: `${dir}`}
         )
         .then(res => {
             console.log("move result", res.data);
@@ -101,7 +69,7 @@ function Dashboard(){
 
     return(
         <div className = "dashboard-container">
-            <Header />             
+            <Header />           
 
             <div className = "dashboard-div">
 
@@ -111,7 +79,9 @@ function Dashboard(){
                         <Map />
                     </div>*/}
 
-                    <ReactVis rooms = {rooms}/>
+                    {/*<ReactVis rooms = {rooms} currentRoom = {moveInfo.title} />*/}
+
+                    <Grid currentRoom = {moveInfo.title}/>
                    
 
                 </div>{/*end map*/}
@@ -128,20 +98,31 @@ function Dashboard(){
 
                     </div>
 
-                    <div className = "players">
-                        The following players are here:<br></br>
-                        {moveInfo.players.map(p =>{
-                            return(<>{p}, </>) //this needs to be in a scrolling text box
-                        })}
+                    <div className = "players">                        
+                        {
+                            moveInfo.players.length === 0 ? <p>Oh No! You are alone here!!</p> : 
+                            <>The following players are here:<br></br>
+                            {moveInfo.players.map(p =>{
+                                return(<>{p}, </>) //this needs to be in a scrolling text box
+                            })}
+                            </>
+                        }
+                        
 
                     </div>
 
                     <div className = "directions">
 
-                        <button onClick={()=>Move("n")}>NORTH</button> 
-                        <button onClick={()=>Move("s")}>SOUTH</button> 
-                        <button onClick={()=>Move("e")}>EAST</button> 
-                        <button onClick={()=>Move("w")}>WEST</button>
+                        <div className = "north"> <button onClick={()=>Move("n")}>NORTH</button> </div>
+
+                        <div className = "south-east"> 
+                            <button onClick={()=>Move("s")}>SOUTH</button> 
+                            <button onClick={()=>Move("e")}>EAST</button> 
+                        </div>
+
+                        <div className = "west">                     
+                            <button onClick={()=>Move("w")}>WEST</button>
+                        </div>
 
                     </div>
 
