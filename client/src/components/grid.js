@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import dungeon_room_data from "../data/rooms.js";
+import dungeon_room_data from "../data/rooms_pics.js";
 import Confetti from 'react-confetti';
 
 import {
@@ -61,15 +61,15 @@ function Grid(props){
     })
      
 
-    var flexGrid = roomNames.map( (name, index ) => {  
+    var flexGrid = roomNames.map( (room, index ) => {  
 
         let classStyles = "";       
-       
+        
 
-        return props.currentRoom === name ?                 
-        <div key = {index} id = {name} className = "tile-selected"> </div>               
+        return props.currentRoom === room.name ?                 
+        <div key = {index} id = {room.name} className = "tile-selected" style = {{ backgroundImage: "url("+room.image+")" }} > </div>               
         :
-        <div key = {index} id = {name} className = "tile"> </div>
+        <div key = {index} id = {room.name} style = {{ backgroundImage: "url("+room.image+")" }} className = "tile"> </div>
 
         
     })
@@ -77,7 +77,7 @@ function Grid(props){
    
     return (
 
-        <div className="grid">              
+        <div className="grid">                      
                 
             {flexGrid} 
 

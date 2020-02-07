@@ -23,13 +23,26 @@
 
 .grid > * {
   //background: rgba(0,0,0,0.1);
-  background: goldenrod;
-  border: 2px white solid; 
+  //background: goldenrod;
+  //border: 2px white solid; 
   
 }
 
 .tile-selected {   
-    background: royalblue;   
-    border: 2px white solid;
+    //background: royalblue;   
+    //border: 2px white solid;
+    //border: 1px solid red;
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
 }
+
+.tile{
+  //background: rgba(0,0,0,0.1);
+  background: goldenrod;
+  //border: 2px white solid; 
+  background-size: 100% 100%; 
+  background-repeat: no-repeat;
+}
+
+
 
