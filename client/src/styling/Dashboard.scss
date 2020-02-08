@@ -458,9 +458,17 @@
           position: absolute;
           width: 40px;
           height:40px;
+          transition: .75s;
           // width: 32px;
           // height: 32px;
         } 
+        .char:active{
+
+          left: inherit;
+          top: inherit;
+          bottom: inherit
+
+        }
         .tile{
           height:40px;
           width: 40px;
