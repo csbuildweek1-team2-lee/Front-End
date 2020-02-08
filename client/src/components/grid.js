@@ -75,10 +75,9 @@ function Grid(props){
         <div key = {index} id = {room.name} className = "tile-selected" style = {{ backgroundImage: "url("+room.image+")" }} > </div>               
         :
             room.display === true ? 
-                <div key = {index} id = {room.name} style = {{ backgroundImage: "url("+room.image+")" }} className = "tile"> </div>
+                <div key = {index} id = {room.name} style = {{ backgroundImage: "url("+room.image+")" }} className = "tileSelected"> </div>
             :
-            <div key = {index} id = {room.name} className = "tile"> </div>
-        
+            <div key = {index} id = {room.name} className = "tile"> </div>       
         
     })
      
