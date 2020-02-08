@@ -15,6 +15,7 @@ import {
 
 function Dashboard(){
 
+
     const [moveErrorMsg, setMoveErrorMsg] = useState();
     const [moveInfo, setMoveInfo] =useState({
         name: "",
@@ -104,9 +105,16 @@ function Dashboard(){
         .catch(error => {
             console.log(error.message);
         });
+
+        //FOCUS ON CHARACTER WHILE SCROLL IS ENABLED
+
+            var elmnt = document.getElementById("char");
+            elmnt.scrollIntoView();
+          
+     
     }
 
-
+//KEY PRESS ///
 document.onkeydown = checkKey;
 
 function checkKey(e) {
@@ -141,6 +149,12 @@ function checkKey(e) {
 
 }
 
+//  function focusChar(){
+//         var elmnt = document.getElementById("char");
+//         elmnt.scrollIntoView();
+      
+//  }
+
 
     return(
         <div className = "dashboard-container" key="key">
@@ -148,7 +162,7 @@ function checkKey(e) {
 
             <div className = "dashboard-div" key="key">
 
-                <div className = "map">
+                <div className = "map" id="map">
                     <Map />
                     <div className="confetti">
                         {moveInfo.title === "The Small Rift of Flame" ? 
@@ -164,7 +178,7 @@ function checkKey(e) {
                             </div> 
 
                     <div className="charContainer">
-                        <img src={character} className="char" key="key" alt="character" style = {{bottom: pos[1] + "px", left: pos[0] + "px"}}></img>
+                        <img src={character} className="char" id="char" key="key" alt="character" style = {{bottom: pos[1] + "px", left: pos[0] + "px"}}></img>
                     </div>
                     
 
@@ -177,9 +191,16 @@ function checkKey(e) {
                     {/*<ReactVis rooms = {rooms} currentRoom = {moveInfo.title} />*/}
 
                     {/* <Grid currentRoom = {moveInfo.title}/> */}
-                   
+
 
                 </div>{/*end map*/}
+                <div className="error-msg">
+                {moveInfo.error_msg && moveInfo.error_msg.length > 0 ?                                 
+                        <Message className = "error-msg" max-width="50" color='teal' >{moveInfo.error_msg}</Message>  
+                    :
+                    null}
+                    </div>
+
 
                 <div className = "right-half">
 
@@ -188,6 +209,7 @@ function checkKey(e) {
                             <Card.Content>
                                 <h3>
                                     {moveInfo.title}
+                                    
                                 </h3>
 
                                 <Card.Description>
@@ -205,10 +227,10 @@ function checkKey(e) {
 
                     {/*error msg*/}
                     
-                    {moveInfo.error_msg && moveInfo.error_msg.length > 0 ?                                 
+                    {/* {moveInfo.error_msg && moveInfo.error_msg.length > 0 ?                                 
                         <Message className = "error-msg" color='red'>{moveInfo.error_msg}</Message>  
                     :
-                    null}  
+                    null}   */}
                     
 
                     {/*<div className = "players">  */}

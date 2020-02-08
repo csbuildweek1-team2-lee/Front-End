@@ -31,23 +31,6 @@ const Map=(props)=>{
     ]
 
 
-    useEffect(()=>{
-        // axiosWithAuth().get(
-        //     'https://lambda-mud-test.herokuapp.com/api/adv/rooms'
-        //     )
-        //     .then(res => {
-        //         // console.log("res.data: ", res.data);  
-        //         //have to use JSON.parse when reading from the test DB      
-        //         setRooms(JSON.parse(res.data.rooms));
-        //         console.log("json parse", JSON.parse(res.data.rooms));
-                
-        //     })
-        //     .catch (err => {
-        //         console.log(err.message)
-        //     })
-    },[])
-
-
 function getTileSprite(type){
     switch(type){
         case 0:
