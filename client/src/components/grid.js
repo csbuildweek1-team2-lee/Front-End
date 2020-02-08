@@ -63,14 +63,22 @@ function Grid(props){
 
     var flexGrid = roomNames.map( (room, index ) => {  
 
-        let classStyles = "";       
+        let classStyles = "";   
+        
+        if (props.currentRoom === room.name){
+            room.display = true;
+
+        }
         
 
         return props.currentRoom === room.name ?                 
         <div key = {index} id = {room.name} className = "tile-selected" style = {{ backgroundImage: "url("+room.image+")" }} > </div>               
         :
-        <div key = {index} id = {room.name} style = {{ backgroundImage: "url("+room.image+")" }} className = "tile"> </div>
-
+            room.display === true ? 
+                <div key = {index} id = {room.name} style = {{ backgroundImage: "url("+room.image+")" }} className = "tile"> </div>
+            :
+            <div key = {index} id = {room.name} className = "tile"> </div>
+        
         
     })
      
