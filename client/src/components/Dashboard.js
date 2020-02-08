@@ -49,7 +49,7 @@ function Dashboard(){
                 console.log(err.message)
             })
 
-    }, []);
+    });
     
 
     const Move=(dir)=>{        
@@ -150,7 +150,11 @@ function Dashboard(){
                    {/* <div className = "directions">*/}
 
                     <Card className = "directions">
-                            <Card.Content>                                
+                        <h3>
+                            What's behind these walls?
+                        </h3>
+
+                        <Card.Content>                                
                                 
 
                         <div className = "north"> <button onClick={()=>Move("n")}>NORTH</button> </div>

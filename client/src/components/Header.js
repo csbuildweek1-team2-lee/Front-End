@@ -13,7 +13,7 @@ const Header = (props) => {
     <div className="header">
       
       <h2>The Infinite Fortress</h2>
-
+     
       <button onClick = {logout} className = "logout-btn">
           Exit
       </button>      
