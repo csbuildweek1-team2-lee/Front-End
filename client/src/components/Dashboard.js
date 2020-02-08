@@ -38,16 +38,10 @@ function Dashboard(){
                 setMoveErrorMsg(res.data.error_msg);
 
                 room_names.map(room=>{
-                    // console.log(room.room)
-                    // console.log("current BE ROOM",res.data.title)
                     const beRoom=res.data.title
                     const feRoom=room.room
                     if(beRoom===feRoom){
-                        console.log("Old Pos", pos)
                         setPos([room.pos[0], room.pos[1]])
-                        console.log("WE FOUND A MATCH")
-                        console.log("These are new coordinates",[room.pos[0], room.pos[1]])
-                        console.log("NewPosition",pos)
                     }else{
                         return
                     }
@@ -117,30 +111,31 @@ document.onkeydown = checkKey;
 
 function checkKey(e) {
 
+    console.log("KEY DOWN")
     e = e || window.event;
 
-    if (e.keyCode === '38') {
+    if (e.keyCode == '38') {
         Move("n")
     }
-    else if (e.keyCode === '40') {
+    else if (e.keyCode == '40') {
         Move("s")
     }
-    else if (e.keyCode === '37') {
+    else if (e.keyCode == '37') {
        Move("w")
     }
-    else if (e.keyCode === '39') {
+    else if (e.keyCode == '39') {
        Move("e")
     }
-    else if (e.keyCode === '78') {
+    else if (e.keyCode == '78') {
         Move("n")
      }
-     else if (e.keyCode === '83') {
+     else if (e.keyCode == '83') {
         Move("s")
      }
-     else if (e.keyCode === '69') {
+     else if (e.keyCode == '69') {
         Move("e")
      }
-     else if (e.keyCode === '87') {
+     else if (e.keyCode == '87') {
         Move("w")
      }
 
@@ -169,7 +164,7 @@ function checkKey(e) {
                             </div> 
 
                     <div className="charContainer">
-                        <img src={character} className="char" alt="character" style = {{bottom: pos[1] + "px", left: pos[0] + "px"}}></img>
+                        <img src={character} className="char" key="key" alt="character" style = {{bottom: pos[1] + "px", left: pos[0] + "px"}}></img>
                     </div>
                     
 
